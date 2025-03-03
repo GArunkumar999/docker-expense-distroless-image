@@ -5,7 +5,7 @@ COPY *.js .
 RUN npm install
 
 # Distroless image 
-FROM gcr.io/distroless/nodejs20-debian12
+FROM node:20-slim
 RUN addgroup -S expense && adduser -S expense -G expense && \
     mkdir /opt/backend && \
     chown -R expense:expense /opt/backend
