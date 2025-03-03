@@ -10,7 +10,7 @@ RUN npm install
 
 # Create user and set permissions (in the build stage, since distroless doesn't support this)
 RUN addgroup -S expense && adduser -S expense -G expense && \
-    mkdir /opt/backend && \
+    # No need to create /opt/backend again, ensure it's created and owned by the correct user
     chown -R expense:expense /opt/backend
 
 # Runtime stage (use distroless Node.js 18 image)
