@@ -5,7 +5,7 @@ COPY *.js .
 RUN npm install
 
 # Distroless image 
-FROM node:20-slim
+FROM gcr.io/distroless/nodejs:18
 RUN addgroup -S expense && adduser -S expense -G expense && \
     mkdir /opt/backend && \
     chown -R expense:expense /opt/backend
