@@ -3,7 +3,8 @@ networks:
     name: expense
 
 volumes:
-  mysql: {}
+  mysql:
+    name: mysql
 
 services:
   mysql:
