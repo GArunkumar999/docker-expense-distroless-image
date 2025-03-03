@@ -9,8 +9,7 @@ COPY *.js .
 RUN npm install
 
 # Runtime stage (use distroless Node.js 18 image)
-FROM gcr.io/distroless/nodejs:10
-
+FROM node:20.18.3-alpine3.21
 # Set environment variables
 ENV DB_HOST="mysql"
 
