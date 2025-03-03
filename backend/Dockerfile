@@ -10,11 +10,13 @@ RUN npm install
 
 # Create user and set permissions (in the build stage, since distroless doesn't support this)
 RUN addgroup -S expense && adduser -S expense -G expense && \
-    # No need to create /opt/backend again, ensure it's created and owned by the correct user
     chown -R expense:expense /opt/backend
 
 # Runtime stage (use distroless Node.js 18 image)
 FROM gcr.io/distroless/nodejs:18
+
+# Create the expense user in the distroless image to match the build stage user
+RUN addgroup -S expense && adduser -S expense -G expense
 
 # Set environment variables
 ENV DB_HOST="mysql"
