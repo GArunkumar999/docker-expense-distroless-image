@@ -1,13 +1,12 @@
+version: '3.8'
+
 networks:
-  # The presence of these objects is sufficient to define them
   expense: {}
 
 volumes:
-  mysql:
-
+  mysql: {}
 
 services:
- # docker run -d --name mysql --network expense mysql:1.0.0 
   mysql:
     image: mysql:1.0.0
     networks:
@@ -16,25 +15,21 @@ services:
     volumes:
       - mysql:/var/lib/mysql
 
- # docker run -d --name backend --network expense backend:1.0.0 
-
   backend:
-   image: backend:1.0.0
-   command: sh -c "sleep 15 && node /opt/backend/index.js"
-   networks:
-     - expense
-   container_name: backend
-   depends_on:
-     - mysql
-
- # docker run -d --name frontend --network expense -p 80:80 frontend:1.0.0 
+    image: backend:1.0.0
+    command: sh -c "sleep 15 && node /opt/backend/index.js"
+    networks:
+      - expense
+    container_name: backend
+    depends_on:
+      - mysql
 
   frontend:
-   image: frontend:1.0.0
-   ports:
-     - 80:80
-   networks:
-     - expense
-   container_name: frontend
-   depends_on:
-     - backend
+    image: frontend:1.0.0
+    ports:
+      - 80:80
+    networks:
+      - expense
+    container_name: frontend
+    depends_on:
+      - backend
